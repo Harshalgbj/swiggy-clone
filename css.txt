@@ -1,0 +1,109 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+  border-radius: 10px;
+  /* color: "black"; */
+  /* text-decoration-style: none; */
+}
+
+.btn1 {
+  border: 1px solid black;
+  height: 50px;
+  width: 50px;
+}
+/* .logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+} */
+.nav-item {
+  padding: 0 10px;
+  /* color: "black";
+  text-decoration-style: none; */
+}
+
+.nav-item > ul {
+  display: flex;
+  font-size: x-large;
+  list-style-type: none;
+}
+.nav-item > ul > li {
+  padding: 10px;
+  margin: 6px;
+}
+/* .effect {
+  margin: 0;
+} */
+
+.res-card {
+  width: 200px;
+  height: 330px;
+  margin: 10px 15px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  padding: 5px;
+}
+.search {
+  padding: 10px;
+}
+
+.img-card {
+  /* height: 130px; */
+  width: 100%;
+  border-radius: 10px;
+}
+.res-card:hover {
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.filter-btn {
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+.restaurant-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.shimmer-card {
+  width: 200px;
+  height: 300px;
+  background: lightgrey;
+  margin: 10px 15px;
+  border-radius: 10px;
+}
+.menu {
+  display: flex;
+}
+
+.Offline {
+  /* border-radius: 50px; */
+  background-color: red;
+  border: 1px solid black;
+}
+
+
+
+---------------------------
+
+
+PS D:\React\React Course\apr3\igniting apps-2> npx tailwind -i ./index.css -o ./tailwind/output.css --watch
+
+Rebuilding...
+
+warn - No utility classes were detected in your souted, double-check the `content` optited, double-check the `content` option in your Tailwind CSS configuration.
+warn - https://tailwindcss.com/docs/content-configum/docs/content-configuration
+
+Done in 319ms.
+
+Rebuilding...
+
+Done in 231ms.
+

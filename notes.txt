@@ -1,0 +1,481 @@
+npm -- it manage the package .
+       it take of version in package.json
+
+*
+ 1).npm init         => for package.json
+*
+
+ package.json - also know as dependency
+
+parcel
+*
+ 2). npm install -D parcel   (-D => dependency)   => for package.lock.json
+*
+"parcel" : "^2.8.3"
+caret (^) ---> it update the minor version (upgrade) only ie - "^2.8.5" 
+
+"parcel" : "~2.8.3"  
+tilde(~)  ---> it update the major version .
+
+CARET is recommended.
+
+difference betn  --  package.json  && package-lock.json
+
+package.json --- it keep approx version 
+
+package-lock.json ----its track of the exact version of that dependency or package
+                   
+if u have package.json  &&  u have package-lock.json 
+then u dont have to worry abut node_modules 
+as u can regenerate.
+*
+    npm install 
+         |
+     it recreates node_modules again    
+*
+ integrity ---> 
+
+node-Modules --> contain all the actual data of packages
+                  transitive dependency
+
+(
+npm install
+npm install parcel)
+
+*  to host apps ---
+
+   npx parcel index.html
+*
+npx --- executing the package
+
+ script scr (url) for react is not recommended 
+ 
+ npm install react     ==> to install the react
+ 
+ npm install react-dom   ==> for  react-dom 
+
+
+# parcel works - (Manager of all library)
+  Dev Build
+  Local Server 
+  HMR - hot module replacement  (refreshing automatically in browser)
+   |- file watching algorithm - written in c++
+  caching - faster builds  (reduce the time its in { parcel-cache}  ie -  Built in 1.04s)
+  IMAGE Optimization 
+  minification of files
+  bundling files 
+  compressing files
+  consistent hashing  => ?
+  code splitting 
+  differential buldling  (to support old browser)
+  diagnostic 
+  error handling (detail of error)
+  https
+  different dev and prod bundle
+
+-----------------------------------------------
+
+ # command 
+*
+ npx parcel build index.html
+*
+it give error in output --
+ "description": "its
+  > 5 | in": "script.js",    
+  >   |      ^^^^^^^^^^^ Did you mean "script.html"
+
+so in package.json --
+
+{
+ 1. "name": "igniting-apps-2",
+ 2. "version": "1.0.0",
+ 3. "description": "its igniting apps",
+ 4. {  "main": "script.js", }  -----------> REMOVE THIS LINE
+ 5."scripts": {
+    "test": "jest"
+  },
+
+WHEN we delete line 4 we get output as--
+
+dist\index.html                482 B    15.70s     
+dist\index.ad248605.css         84 B    10.38s     
+dist\index.eb28d9ef.js     140.34 KB    15.29s     
+
+this files are PRODUCT READY files TO serve USERS
+
+parcel-cache / dist / node_modules
+  can be regenerate by following command
+*
+ npx parcel index.html
+*
+
+as it can regenerate SO NO need to push it in GITHUB 
+so PUT in to .Gitignore folder
+
+----------
+browser-list (to tell computer in which browers to support)
+
+IN package.json---write =>
+  "browserslist": [
+    "last 10 Chrome version",
+    "last 10 Firefox version"
+          or
+        "last 2 version",    
+  ]
+
+
+meaning ---
+
+ npx parcel index.html  => executing package in source file  => deveploment Build
+ types --- production build && deveploment build
+
+=> we can create to replace  the ABOVE comment
+*
+npm run  start  || npm start   ==> for production 
+*
+npm run  build   ==> for deveploment   
+* 
+
+in package.json we have wrote scripts for the command
+ie--    "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+
+
+----------------------------------------------------
+ JXS   ----> its not HTML in JS 
+             ITS html-likes or XML-like syntax
+it understands  ES6   ie Ecmascript
+
+// (this code is converted before it reaches JS Engine) --done by PARCEL && BABEL
+
+BABEL --- its transpiler (js compiller)
+
+JSX ==> CONVERTED to react.createElement =>  reactElement-js object ==> HtmlElement(render)
+
+ # Attributes  ---> to JSX use camelcase ie  harshalGangurde
+ie -- className=""
+
+valid code  ---- in single line|
+  const jskHeading = <h1 className="head">nameste JSX</h1>;
+
+---in multiple line  use ()
+( const jskHeading = <h1 className="head">
+nameste JSX</h1>  ); 
+
+------------------------------------------
+// React component
+ types --- class based  (this is Old)
+           functional based   (this is new )
+
+syntax type ------
+
+const HeadingComponent = () => {
+  return <h1>this is Functional component</h1>;
+};
+
+const HeadingComponent = () => (
+   <h1>this is Functional component</h1>;
+);
+
+
+if we want two component in div then
+
+#  its Component composition
+div id="root"
+  <Title/>    ====>   just write this syntax in the function 
+  div class="head" 
+
+{ }  ==> u can us to render  js in div 
+ie {numbers ,element , 300+200}
+
+JSX TAKE care if api.data is injected in ur div browser 
+if its malicious attact it protect browers
+ 
+<div id = parent>   in console this div will be seen 
+  <div></div>
+  <div></div>
+  <p></p>
+</div>;
+
+# React Fragment
+
+<React.Fragment>    in console this Fragment will not be seen
+ <div></div>
+  <div></div>
+  <p></p>
+</React.Fragment>
+
+   OR 
+
+<>  
+ <div></div>
+  <div></div>
+  <p></p>
+</>
+
+
+
+-----------------------------------------------------------------------------
+
+  #  Making Project Food apps
+
+HEADER  --> LOGO 
+            NAV BAR ---> HOME | ABOUT
+
+BODY   --> SEARCH BAR 
+           CARD CONTAINER ---> CARDS ---
+                                       
+
+FOOTER ---> COPYWRITE 
+          CONTACT INFO 
+          ABOUT US
+
+
+
+ const stylecard ={
+  backgrounColor = "#f0f0f0"
+ }
+
+Style = {stylecard }
+
+
+props is property 
+
+const CardContainer = (props) => {
+
+    or 
+const CardContainer = ({resName ,crusine}) => {    
+
+ 
+ # conflict driven UI
+
+optional chaining    => (?) 
+     const { name,rating,crusines} = resdata?.data
+   
+   when u use .map() all use   -- keys  
+
+
+
+ REACT hooks ----
+ its a  normal js utility function which is written in react
+ 
+ whenever state Variable is updated react rerender its component
+
+1. usestate () - superpowerful State Variable 
+                 
+ useEffect()
+
+
+react uses reconsoliation algorithm (react fiber) 
+--> virtual DOM -- representation of actual DOM 
+                 its normal js nested object  
+
+div algorithm --- tries to find differnce betn old and new dom 
+   
+react is doing effecient Dom manupulation 
+
+
+* config UI
+
+
+useEffect----
+
+
+? shimmer effect--
+ 
+ props------> router={appRouter} 
+
+types of router --->
+ client side routing 
+ serve side routing
+
+ Outlet -- all children go in this
+
+
+
+useParams  --- to read URL
+
+class component ------> 
+  render Method ---- Imp
+
+
+ in make my trip (for system design interview)
+--->
+  chunking
+  code splitting 
+  dynamic Import 
+  on demand loading
+  lazy loading
+
+const Instamart = lazy(() => import("./components/instamart"));
+    <Suspense>
+     <Instamart />
+    </Suspense>
+
+
+  because on rendering instamart  it take 27ms 
+  before that error comes ,but when we refresh it again 
+  it will show the PAGE
+
+  to handle THIS ISSUE use   <Suspense>
+
+ import("./components/instamart")); ---> its a PROMISE
+
+
+
+TO study Now --
+ 
+1) Talwin css -->>
+  - CSS on same file
+  - reusability 
+  - less bundle size
+  flexible UI 
+
+css--
+ // w-[200px]
+
+Pros---
+ code is less 
+ no duplicate css
+ faster deveploment
+ easy to debug
+
+ Cons--
+ high learning 
+ too much classNames
+
+ 
+states and Props use Data 
+there is UI And Data Layer
+
+state -- local variable
+
+
+
+
+props  -- value pass fr one to another component 
+       
+// profiling in inspect
+it record all render like clickin on homw and then to about
+
+       
+// useContext------
+to accesess data  to all the apps 
+
+Ways----
+1)import UserContext from "../utils/UserContext";
+
+  <UserContext.Consumer>
+            {({ user }) => <h4 className="font-bold">{user.name}</h4>}
+          </UserContext.Consumer>
+
+2)import { useContext } from "react";
+import UserContext from "../utils/UserContext";
+ 
+   const { user } = useContext(UserContext);
+
+       <h4>This side is Developed by {user.name}</h4>
+
+to modify user DATA --------->>
+
+ const AppLayout = () => {
+  const [user, setUser] = useState({
+    name: "Sarvesh Bro",
+    email: "xyz@gmail.com",
+  });
+  return (
+    <UserContext.Provider value={{ user: user }}>
+      <Header />
+      <Outlet />
+      <Footer />
+    </UserContext.Provider>
+  );
+};
+
+ diffn  bundler and react ?
+ *****
+
+ redux-------->
+
+ if we click + button it dispatches an action which call the reducer function
+ which updated slice of the redux store
+--> seclector(to read data .its a HOOK ) --> will update my card 
+*****
+to install redux
+npm i  @reduxjs/toolkit
+  +
+ npm i  react-redux
+
+
+
+to install Tesing library
+
+ npm i --save-dev @testing-library/react
+    +
+ npm i -D jest
+   +
+   npx jest --init   
+
+   then question is asked  ----->
+                                                  
+PS D:\React\React Course\apr3\igniting apps-2> npx jest --init
+
+The following questions will help Jest to create a suitable configuration for your project
+
+√ Would you like to use Typescript for the configuration file? ... no
+√ Choose the test environment that will be used for testing » jsdom (browser-like)
+√ Do you want Jest to add coverage reports? ... yes      
+√ Which provider should be used to instrument code for coverage? » babel
+√ Automatically clear mock calls, instances, contexts and results before every test? ... yes
+
+📝  Configuration file created at D:\React\React Course\apr3\igniting apps-2\jest.config.js
+ 
+--------------
+    npm run test
+
+> igniting-apps-2@1.0.0 test
+> jest
+
+● Validation Error:
+
+  Test environment jest-environment-jsdom cannot be found. Make sure the testEnvironment configuration option points to an existing node module.
+
+  Configuration Documentation:
+  https://jestjs.io/docs/configuration
+
+
+As of Jest 28 "jest-environment-jsdom" is no longer shipped by default, make sure to install it separately.    
+ 
+ to fix this use --->
+ 
+    npm i -D jest-environment-jsdom
+
+ now Config our babel--->
+
+ npm i --save-dev babel-jest @babel/core @babel/preset-env
+
+
+.toBeInTheDocument(); 
+--->
+ npm i -D @testing-library/jest-dom
+
+
+ ------------------------------------
+
+? headless browers
+? selenium testing 
+ manual testing 
+ unit testing
+ integrating
+
+JEST ===>
+ its js testing framwork 
+
+
+
+
+
+
