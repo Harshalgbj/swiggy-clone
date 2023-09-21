@@ -3,7 +3,7 @@ import { CardContainer } from "./CardContainer";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import useOnline from "../utils/useOnline";
-
+import { Link } from "react-router-dom";
 function filterData(searchTxt, restaurants) {
   return restaurants.filter((restaurant) =>
     restaurant?.data?.name?.toLowerCase().includes(searchTxt)
@@ -20,9 +20,11 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5204303&lng=73.8567437&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    setRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    setRestaurants(
+      json?.data?.cards[2].card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   }
-
+  // console.log(restaurants);
   useEffect(() => {
     getRestaurants();
   }, []);
@@ -41,7 +43,7 @@ const Body = () => {
     );
   }
 
-  return restaurants.length === 0 ? (
+  return restaurants?.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -70,9 +72,9 @@ const Body = () => {
         className="flex flex-wrap md:container md:mx-auto  "
         data-testid="res-list"
       >
-        {restaurants.map((restaurant) => {
+        {restaurants.map((restaurant, index) => {
           return (
-            <CardContainer {...restaurant.data} key={restaurant.data.id} />
+            <CardContainer {...restaurant.info} key={restaurant?.info?.id} />
           );
         })}
       </div>
