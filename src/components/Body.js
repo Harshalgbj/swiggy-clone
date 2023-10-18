@@ -9,6 +9,7 @@ function filterData(searchTxt, restaurants) {
     restaurant?.data?.name?.toLowerCase().includes(searchTxt)
   );
 }
+//ok
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -17,14 +18,13 @@ const Body = () => {
 
   async function getRestaurants() {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5204303&lng=73.8567437&page_type=DESKTOP_WEB_LISTING"
+      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     setRestaurants(
       json?.data?.cards[2].card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   }
-  // console.log(restaurants);
   useEffect(() => {
     getRestaurants();
   }, []);
@@ -33,7 +33,9 @@ const Body = () => {
   // code shimmer UI
 
   const isOnline = useOnline();
-
+  {
+    console.log(restaurants);
+  }
   if (!isOnline) {
     return (
       <div>
