@@ -7,7 +7,12 @@ const useRestaurant = (id) => {
   const [restaurant, setRestaurant] = useState({});
 
   useEffect(() => {
-    fetch(FETCH_MENU_URL + id)
+    fetch(FETCH_MENU_URL + id, {
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        contentType: "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((data) => setRestaurant(data));
   }, [id]);

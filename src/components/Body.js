@@ -1,4 +1,4 @@
-import { restaurantList } from "./contants";
+import { FETCH_RESTAURANTS_LIST } from "./contants";
 import { CardContainer } from "./CardContainer";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
@@ -14,20 +14,25 @@ function filterData(searchTxt, restaurants) {
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [searchTxt, setsearchTxt] = useState("");
-  const [restaurants, setRestaurants] = useState([]);
+  const [restaurants, setRestaurants] = useState(null);
 
   async function getRestaurants() {
-    const data = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(FETCH_RESTAURANTS_LIST, {
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        contentType: "application/json",
+      },
+    });
     const json = await data.json();
     setRestaurants(
-      json?.data?.cards[2].card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[1].card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   }
   useEffect(() => {
-    getRestaurants();
-  }, []);
+    if (restaurants == null) {
+      getRestaurants();
+    }
+  }, [restaurants]);
 
   // conditional rendering
   // code shimmer UI
@@ -71,14 +76,14 @@ const Body = () => {
         </button>
       </div>
       <div
-        className="flex flex-wrap md:container md:mx-auto  "
+        className="flex flex-wrap md:container md:mx-auto"
         data-testid="res-list"
       >
-        {restaurants.map((restaurant, index) => {
-          return (
-            <CardContainer {...restaurant.info} key={restaurant?.info?.id} />
-          );
-        })}
+        {restaurants?.length > 0
+          ? restaurants.map((restaurant, index) => (
+              <CardContainer {...restaurant.info} key={restaurant?.info?.id} />
+            ))
+          : null}
       </div>
     </div>
   );
