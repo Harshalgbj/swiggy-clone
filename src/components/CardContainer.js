@@ -10,7 +10,7 @@ export const CardContainer = ({
   cloudinaryImageId,
 }) => {
   return (
-    <div className=" w-56 h-56 p-2 m-2 shadow-lg bg-orange-50">
+    <div className=" w-56  p-2 m-2 shadow-lg bg-orange-50">
       <Link to={`restaurant/${id}`}>
         <div className="res-card">
           <img className="img-card  " src={CDN_URL + cloudinaryImageId} />
