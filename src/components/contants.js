@@ -1876,3 +1876,5 @@ export const restaurantList = [
     subtype: "basic",
   },
 ];
+
+export const restaurantNewList = [];
