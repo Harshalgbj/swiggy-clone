@@ -10,7 +10,7 @@ const RestrauntMenu = () => {
   const { id } = params;
 
   const restaurant = useRestaurant(id);
-
+  console.log(restaurant);
   const dispatch = useDispatch();
 
   const addFoodItem = (item) => {
@@ -20,28 +20,28 @@ const RestrauntMenu = () => {
   return (
     <div className=" flex h-auto">
       <div>
-        <h1>restaurant id : {id}</h1>
-        <h3>{restaurant?.data?.cards[0]?.card?.card?.info?.name}</h3>
+        <h1>restaurant id : {id} </h1>
+        <h3>{restaurant?.data?.cards[2]?.card?.card?.info?.name}</h3>
         <img
           className=" w-56 "
           src={
             CDN_URL +
-            restaurant?.data?.cards[0]?.card?.card?.info?.cloudinaryImageId
+            restaurant?.data?.cards[2]?.card?.card?.info?.cloudinaryImageId
           }
         />
-        <h3>{restaurant?.data?.cards[0]?.card?.card?.info?.areaName}</h3>
-        <h3>{restaurant?.data?.cards[0]?.card?.card?.info?.city}</h3>
-        <h3>{restaurant?.data?.cards[0]?.card?.card?.info?.avgRating}</h3>
-        <h3>{restaurant?.data?.cards[0]?.card?.card?.info?.cuisines}</h3>
+        <h3>{restaurant?.data?.cards[2]?.card?.card?.info?.areaName}</h3>
+        <h3>{restaurant?.data?.cards[2]?.card?.card?.info?.city}</h3>
+        <h3>{restaurant?.data?.cards[2]?.card?.card?.info?.avgRating}</h3>
+        <h3>{restaurant?.data?.cards[2]?.card?.card?.info?.cuisines}</h3>
         <h3>
-          {restaurant?.data?.cards[0]?.card?.card?.info?.costForTwoMessage}
+          {restaurant?.data?.cards[2]?.card?.card?.info?.costForTwoMessage}
         </h3>
       </div>
       <br />
       <div className=" pl-10 m-5 ">
         <h1 className=" text-lg text-fuchsia-700">Menu</h1>
         <ul>
-          {restaurant?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards.map(
+          {restaurant?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards.map(
             (item) => (
               <li key={item.card.info.id}>
                 {item.card.info.name} -
